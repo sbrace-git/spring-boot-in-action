@@ -1,0 +1,12 @@
+spring:
+  main:
+    banner-mode: off
+  thymeleaf:
+    cache: true
+#    cache: false
+
+server:
+  port: 8000
+logging:
+  level:
+    org.thymeleaf: TRACE
