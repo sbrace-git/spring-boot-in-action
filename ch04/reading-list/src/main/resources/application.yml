@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/reading-list
+    username: root
+    password: 1111
+  main:
+    banner-mode: console
+  thymeleaf:
+    cache: false
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  port: 8000
+
+amazon:
+  associateId: habuma-20
+
+---
+logging:
+  level:
+    root: debug
+spring:
+  config:
+    activate:
+      on-profile: development
+---
+logging:
+  level:
+    org.thymeleaf: trace
+    com.example.readinglist: trace
+  file:
+    path: F:\common\temp    # default file name: spring.log
+    #    name: F:\common\temp\reading-list-log.log
+  log4j2:
+    config:
+      override: classpath:my-log4j2-config.xml
+spring:
+  config:
+    activate:
+      on-profile: production
