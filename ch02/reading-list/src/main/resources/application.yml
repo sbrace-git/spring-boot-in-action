@@ -10,7 +10,6 @@ server:
 logging:
   level:
     org.thymeleaf: TRACE
-    com.example.readinglist: trace
   file:
     #path: F:\common\temp             default file name: spring.log
     name: F:\common\temp\reading-list-log.log
