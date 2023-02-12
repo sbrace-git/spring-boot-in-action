@@ -1,5 +1,6 @@
 package com.example.readinglist;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +11,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@ConfigurationProperties(prefix = "amazon")
 public class ReadingListController {
+
+    private String associateId;
+
+    public void setAssociateId(String associateId) {
+        this.associateId = associateId;
+    }
 
     private final ReadingListRepository readingListRepository;
 
@@ -24,6 +32,7 @@ public class ReadingListController {
 
         List<Book> readingList = readingListRepository.findByReader(reader);
         if (readingList != null) {
+            model.addAttribute("amazonID", associateId);
             model.addAttribute("books", readingList);
         }
         return "readingList";

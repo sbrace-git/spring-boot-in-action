@@ -27,3 +27,5 @@ logging:
   log4j2:
     config:
       override: classpath:my-log4j2-config.xml
+amazon:
+  associateId: habuma-20
