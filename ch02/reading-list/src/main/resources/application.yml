@@ -1,6 +1,6 @@
 spring:
   main:
-    banner-mode: console
+    banner-mode: off
   thymeleaf:
     cache: true
 #    cache: false
@@ -10,6 +10,3 @@ server:
 logging:
   level:
     org.thymeleaf: TRACE
-  file:
-    #path: F:\common\temp             default file name: spring.log
-    name: F:\common\temp\reading-list-log.log
