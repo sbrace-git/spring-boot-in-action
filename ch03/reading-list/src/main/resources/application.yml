@@ -17,6 +17,19 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 server:
   port: 8000
+
+amazon:
+  associateId: habuma-20
+
+---
+logging:
+  level:
+    root: debug
+spring:
+  config:
+    activate:
+      on-profile: development
+---
 logging:
   level:
     org.thymeleaf: trace
@@ -27,5 +40,7 @@ logging:
   log4j2:
     config:
       override: classpath:my-log4j2-config.xml
-amazon:
-  associateId: habuma-20
+spring:
+  config:
+    activate:
+      on-profile: production
