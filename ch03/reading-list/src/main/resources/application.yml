@@ -11,4 +11,7 @@ logging:
     com.example.readinglist: trace
   file:
     path: F:\common\temp    # default file name: spring.log
-#    name: F:\common\temp\reading-list-log.log
+    #    name: F:\common\temp\reading-list-log.log
+  log4j2:
+    config:
+      override: classpath:my-log4j2-config.xml
