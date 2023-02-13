@@ -20,7 +20,6 @@ server:
 
 amazon:
   associateId: habuma-20
-
 ---
 logging:
   level:
@@ -44,3 +43,10 @@ spring:
   config:
     activate:
       on-profile: production
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
