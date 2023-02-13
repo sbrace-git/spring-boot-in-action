@@ -40,7 +40,10 @@ public class SecurityConfig {
     @Bean
     UserDetailsService userDetailsService() {
         logger.info("SecurityConfig userDetailsService");
-        return username -> readerRepository.findById(username).orElseGet(this::defaultUser);
+        return username -> {
+            logger.info("username = {}", username);
+            return readerRepository.findById(username).orElseGet(this::defaultUser);
+        };
     }
 
     @Bean
