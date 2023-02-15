@@ -22,6 +22,9 @@ amazon:
   associateId: habuma-20
 
 management:
+  endpoint:
+    shutdown:
+      enabled: true
   endpoints:
     web:
       exposure:
