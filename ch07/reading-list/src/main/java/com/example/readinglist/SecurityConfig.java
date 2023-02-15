@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Profile("production")
+@Profile("!dev")
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -26,6 +26,7 @@ public class SecurityConfig {
         logger.info("SecurityConfig securityFilterChain");
         http
                 .authorizeRequests()
+                .antMatchers("/actuator/**").permitAll()
                 .anyRequest().hasRole("READER")
 
                 .and()

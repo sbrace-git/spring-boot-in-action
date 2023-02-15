@@ -20,6 +20,12 @@ server:
 
 amazon:
   associateId: habuma-20
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 ---
 logging:
   level:
