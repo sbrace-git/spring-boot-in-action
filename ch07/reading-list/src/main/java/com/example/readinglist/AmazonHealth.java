@@ -14,6 +14,7 @@ public class AmazonHealth implements HealthIndicator {
         try {
             RestTemplate rest = new RestTemplate();
             rest.getForObject("http://www.amazon.com", String.class);
+            int a = 1 / 0;
             return Health.up().build();
         } catch (Exception e) {
             return Health.down().withDetail("reason", e.getMessage()).build();
