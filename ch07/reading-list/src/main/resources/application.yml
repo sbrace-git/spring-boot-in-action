@@ -30,6 +30,8 @@ management:
   endpoint:
     shutdown:
       enabled: true
+    health:
+      show-details: always
   endpoints:
     web:
       exposure:
