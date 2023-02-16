@@ -1,11 +1,14 @@
 package com.example.readinglist;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -16,11 +19,12 @@ public class ReadingListController {
 
     private final ReadingListRepository readingListRepository;
     private final AmazonProperties amazonProperties;
+    private final MeterRegistry meterRegistry;
 
-
-    public ReadingListController(ReadingListRepository readingListRepository, AmazonProperties amazonProperties) {
+    public ReadingListController(ReadingListRepository readingListRepository, AmazonProperties amazonProperties, MeterRegistry meterRegistry) {
         this.readingListRepository = readingListRepository;
         this.amazonProperties = amazonProperties;
+        this.meterRegistry = meterRegistry;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -37,6 +41,9 @@ public class ReadingListController {
     public String addToReadingList(Book book) {
         book.setReader(DEFAULT_READER);
         readingListRepository.save(book);
+        meterRegistry.counter("books.saved").increment();
+        ArrayList<Book> gauge = meterRegistry.gauge("books.saved2", Collections.emptyList(), new ArrayList<Book>(), List::size);
+        gauge.add(book);
         return "redirect:/readingList";
     }
 
