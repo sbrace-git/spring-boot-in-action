@@ -9,3 +9,4 @@ ISBN: 9787115433145
 - Maven 3.8.6
 - MySQL 8.0.31
 - Grails 5.3.0
+- MongoDB 6.0.3
