@@ -1,6 +1,8 @@
 package com.example.readinglist;
 
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Tag;
+import io.micrometer.core.instrument.Tags;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -41,8 +42,8 @@ public class ReadingListController {
     public String addToReadingList(Book book) {
         book.setReader(DEFAULT_READER);
         readingListRepository.save(book);
-        meterRegistry.counter("books.saved").increment();
-        ArrayList<Book> gauge = meterRegistry.gauge("books.saved2", Collections.emptyList(), new ArrayList<Book>(), List::size);
+        meterRegistry.counter("books.saved", "book.title", book.getTitle()).increment();
+        ArrayList<Book> gauge = meterRegistry.gauge("books.saved2", Tags.of(Tag.of("book.title", book.getTitle())), new ArrayList<>(), List::size);
         gauge.add(book);
         return "redirect:/readingList";
     }
