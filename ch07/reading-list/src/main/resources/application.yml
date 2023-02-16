@@ -1,4 +1,9 @@
 spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: readingList
   datasource:
     url: jdbc:mysql://localhost:3306/reading-list
     username: root
@@ -38,6 +43,9 @@ info:
   contact:
     email: support@myreadinglist.com
     phone: 1-888-555-1971
+logging:
+  level:
+    com.mongodb: trace
 ---
 logging:
   level:
