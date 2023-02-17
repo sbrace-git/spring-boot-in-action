@@ -1,0 +1,83 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: readingList
+  datasource:
+    url: jdbc:mysql://localhost:3306/reading-list
+    username: root
+    password: 1111
+  main:
+    banner-mode: console
+  thymeleaf:
+    cache: false
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  port: 8000
+
+amazon:
+  associateId: habuma-20
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      path-mapping:
+        shutdown: kill
+      base-path: /my-path
+  info:
+    env:
+      enabled: true
+info:
+  contact:
+    email: support@myreadinglist.com
+    phone: 1-888-555-1971
+logging:
+  level:
+    com.mongodb: trace
+---
+logging:
+  level:
+    root: debug
+spring:
+  config:
+    activate:
+      on-profile: development
+---
+logging:
+  level:
+    org.thymeleaf: trace
+    com.example.readinglist: trace
+  file:
+    path: F:\common\temp    # default file name: spring.log
+    #    name: F:\common\temp\reading-list-log.log
+  log4j2:
+    config:
+      override: classpath:my-log4j2-config.xml
+spring:
+  config:
+    activate:
+      on-profile: production
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
