@@ -3,6 +3,7 @@ package com.example.readinglist;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,8 +27,8 @@ public class SecurityConfig {
         logger.info("SecurityConfig securityFilterChain");
         http
                 .authorizeRequests()
-                .antMatchers("/actuator/kill").hasRole("ADMIN")
-                .antMatchers("/actuator/**").permitAll()
+                .requestMatchers(EndpointRequest.to("shutdown")).hasRole("ADMIN")
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().hasRole("READER")
 
                 .and()

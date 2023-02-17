@@ -38,6 +38,7 @@ management:
         include: "*"
       path-mapping:
         shutdown: kill
+      base-path: /my-path
   info:
     env:
       enabled: true
