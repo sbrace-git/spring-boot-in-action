@@ -26,6 +26,7 @@ public class SecurityConfig {
         logger.info("SecurityConfig securityFilterChain");
         http
                 .authorizeRequests()
+                .antMatchers("/actuator/kill").hasRole("ADMIN")
                 .antMatchers("/actuator/**").permitAll()
                 .anyRequest().hasRole("READER")
 
@@ -43,8 +44,21 @@ public class SecurityConfig {
         logger.info("SecurityConfig userDetailsService");
         return username -> {
             logger.info("username = {}", username);
+            if ("admin".equals(username)) {
+                return adminUser();
+            }
             return readerRepository.findById(username).orElseGet(this::defaultUser);
         };
+    }
+
+    @Bean
+    Reader adminUser() {
+        logger.info("SecurityConfig defaultUser");
+        Reader reader = new Reader();
+        reader.setUsername("admin");
+        reader.setPassword(passwordEncoder().encode("1111"));
+        reader.setFullname("admin-user");
+        return reader;
     }
 
     @Bean

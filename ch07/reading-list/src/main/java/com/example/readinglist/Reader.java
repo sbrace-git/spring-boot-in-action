@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -57,6 +58,10 @@ public class Reader implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if ("admin".equals(username)) {
+            return Arrays.asList(new SimpleGrantedAuthority("ROLE_READER"),
+                    new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_READER"));
     }
 
