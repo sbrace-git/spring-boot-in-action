@@ -3,7 +3,10 @@ package com.example.readinglist;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
+
 @SpringBootTest
 public class BookServiceTest {
 
@@ -11,22 +14,18 @@ public class BookServiceTest {
     private BookService bookService;
 
     @Test
-    public void testService() {
-        Book book = bookService.findById(1L);
+    public void insertQueryBook() {
+        Book book = new Book();
+        book.setTitle("title");
+        book.setReader("reader");
+        book.setIsbn("isbn");
+        book.setAuthor("author");
+        book.setDescription("description");
 
-        System.out.println(book.getId());
-        System.out.println(book.getAuthor());
-        System.out.println(book.getDescription());
-        System.out.println(book.getIsbn());
-        System.out.println(book.getReader());
-        System.out.println(book.getTitle());
+        Book save = bookService.save(book);
+        Book findBook = bookService.findById(save.getId());
 
+        assertThat(book, samePropertyValuesAs(findBook));
 
-        assertEquals(book.getId(),1L);
-        assertEquals(book.getAuthor(),"1");
-        assertEquals(book.getDescription(),"1");
-        assertEquals(book.getIsbn(),"1");
-        assertEquals(book.getReader(),"test");
-        assertEquals(book.getTitle(),"1");
     }
 }
