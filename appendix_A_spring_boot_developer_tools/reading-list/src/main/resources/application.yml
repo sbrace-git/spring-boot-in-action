@@ -1,4 +1,7 @@
 spring:
+  devtools:
+    remote:
+      secret: password
   data:
     mongodb:
       host: localhost
