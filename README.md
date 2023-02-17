@@ -10,3 +10,4 @@ ISBN: 9787115433145
 - MySQL 8.0.31
 - Grails 5.3.0
 - MongoDB 6.0.3
+- Tomcat 9.0.71
